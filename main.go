@@ -24,6 +24,7 @@ func init() {
 	flag.StringVar(&timeout, "timeout", "10s", "connection timeout")
 }
 
+// Reader goroutine
 func Reader(ctx context.Context, conn net.Conn) {
 EXITIN:
 	for {
@@ -51,6 +52,7 @@ EXITIN:
 	}
 }
 
+// Writer goroutine
 func Writer(ctx context.Context, conn net.Conn) {
 	input := make(chan string, 2)
 	go getInput(input)
