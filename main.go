@@ -68,6 +68,7 @@ EXITOUT:
 			}
 			_, err := conn.Write([]byte(fmt.Sprintf("%s\n", i)))
 			if err != nil {
+				ctx.Done()
 				log.Printf("cannot write to socket: %v", err)
 			}
 		}
@@ -101,7 +102,6 @@ func main() {
 
 	if err != nil {
 		log.Fatalf("Unable to connect: %v", err)
-
 	}
 
 	wg := sync.WaitGroup{}
